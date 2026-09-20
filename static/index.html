@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion reader</title>
+<meta name="description" content="Type a sentence and a BiGRU model tells you which emotion it carries.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <span class="brand">Emotion reader</span>
+    <span class="status waking" id="status"><i class="dot"></i><span id="statusText">Connecting to the model…</span></span>
+  </header>
+
+  <main class="grid">
+    <section aria-labelledby="title">
+      <h1 id="title">How does this sentence feel?</h1>
+      <p class="lede">Type anything. A BiGRU model scores it against six emotions.</p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label class="sr-only" for="text">Sentence to analyse</label>
+          <textarea id="text" rows="4" maxlength="2000" placeholder="I can't believe they remembered my birthday"></textarea>
+          <div class="field-foot">
+            <span>Enter to send, Shift+Enter for a new line</span>
+            <span class="count" id="count">0 / 2000</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="go" id="go" type="submit" disabled>Read the emotion</button>
+          <p class="error" id="error" role="alert" hidden></p>
+        </div>
+      </form>
+
+      <p class="small-title">Try an example</p>
+      <div class="chips" id="chips"></div>
+
+      <div id="recentWrap" hidden>
+        <p class="small-title">Recent</p>
+        <ul class="recent" id="recent"></ul>
+      </div>
+    </section>
+
+    <section class="stage" aria-label="Result">
+      <div class="orb-wrap" id="orbWrap" title="Poke it">
+        <canvas id="orb" aria-hidden="true"></canvas>
+        <div class="face" id="face" aria-hidden="true"><span class="glyph" id="glyph">💭</span></div>
+      </div>
+
+      <div class="result">
+        <p class="verdict idle" id="verdict" aria-hidden="true">Nothing to read yet</p>
+        <p class="meta" id="meta" aria-hidden="true">Write a sentence or pick an example.</p>
+        <p class="sr-only" id="srResult" aria-live="polite"></p>
+      </div>
+
+      <ul class="bars" id="bars" aria-label="Probability for each emotion"></ul>
+    </section>
+  </main>
+</div>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>
