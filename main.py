@@ -17,7 +17,7 @@ import numpy as np
 
 
 # A. Model path
-model_path =  "Artifacts/BiGRU_Model.keras"
+model_path = "Artifacts/BiGRU_model.keras"
 
 # B. Tokenizer path
 tokenizer_path = "Artifacts/tokenizer.pkl"
